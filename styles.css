@@ -1,0 +1,182 @@
+body {
+    background-color: black;
+    background-image: radial-gradient(circle, #d4af37, transparent);
+    background-repeat: no-repeat;
+    background-position: center;
+    font-family: 'Anton', Arial, sans-serif; /* Используем San Francisco Pro Text Heavy, если доступно */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    text-align: center;
+    color: white;
+    transform: scale(1.3); /* Увеличение всех элементов на 30% */
+}
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.coin-icon {
+    width: 28px; /* Уменьшение на 30% */
+    height: 28px; /* Уменьшение на 30% */
+    margin-right: 10px;
+}
+.header h1 {
+    font-weight: normal;
+    font-size: 2em;
+    margin: 0;
+}
+.coin {
+    position: relative;
+}
+.coin img {
+    width: 250px;
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.1s;
+    touch-action: manipulation; /* Отключение выделения области изображения при касании */
+}
+
+.coin img:active {
+    transform: scale(0.9); 
+}
+.buttons {
+    margin-top: 30px;
+}
+.menu-button {
+    margin: 5px;
+    padding: 10px 20px;
+    border: none;
+    background-color: #B8860B;
+    color: white;
+    cursor: pointer;
+    font-size: 1em;
+    font-family: 'Anton', Arial, sans-serif;
+    border-radius: 20px;
+    box-shadow: 0px 5px #7C5903;
+    transition: all 0.2s ease;
+    position: relative;
+}
+.menu-button, button {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0); /* Отключение выделения на устройствах с iOS */
+    outline: none; /* Убираем контур фокуса */
+}
+
+.menu-button img {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.menu-button:active {
+    box-shadow: 0px 2px #9c7c29;
+    transform: translateY(3px);
+}
+#energy-container {
+    margin-top: 20px;
+}
+#energy-text {
+    margin: 3px;
+    color: #ffd700;
+}
+#energy-bar {
+    width: 100%;
+    background-color: transparent;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 0 10px #ffd700; /* Неоновое свечение */
+}
+#energy {
+    height: 20px;
+    background-color: #ffd700;
+    border-radius: 10px;
+    transition: width 0.5s ease-out; /* Плавный переход ширины */
+}
+.floating-text {
+    position: absolute;
+    color: #ffd700;
+    font-size: 3em;
+    font-weight: bold;
+    animation: fadeOut 1s forwards;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+/* Кнопка с изображением и дополнительной информацией */
+.info-button-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+.info-button {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+.info-button img {
+    width: 30px;
+    height: 30px;
+}
+.info-text {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 5px 10px;
+    font-size: 0.8em;
+}
+.info-button:hover + .info-text {
+    display: block;
+}
+;
+}
+
+.tab { display: none; } .back-button { margin: 5px; padding: 10px 20px; border: none; background-color: #B8860B; color: white; cursor: pointer; font-size: 1em; font-family: 'Anton', Arial, sans-serif; border-radius: 20px; box-shadow: 0px 5px #7C5903; transition: all 0.2s ease; position: relative; }

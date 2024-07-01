@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web3 Clicker</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+    <style>
+        
+        .header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px; /* Move the header 20px lower */
+}
+
+      
+  @keyframes stars {
+            from {
+                transform: translateZ(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateZ(-1000px);
+                opacity: 0;
+            }
+        }
+
+ .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+            perspective: 1000px;
+        }
+
+       .star {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.6);
+    transform-origin: 0 0 0;
+    animation: stars 4s linear infinite; /* Пример: анимация длится 4 секунды */
+
+    animation-delay: 0s;
+    border-radius: 50%;
+    opacity: 0; /* Добавьте это свойство */
+}
+
+        
+        body, html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Убирает горизонтальную прокрутку */
+    height: 100%;
+}
+
+#starsContainer {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden; /* Убирает вертикальную прокрутку, если есть */
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="image44.png" alt="Coin Icon" class="coin-icon">
+            <h1 id="coin-count">0</h1>
+        </div>
+        <div class="coin" onclick="incrementCount(event)">
+            <img src="coin_image6.png" alt="Coin" class="clickable">
+        </div>
+        <div id="energy-container">
+            <p id="energy-text">⚡️500/500</p>
+            <div id="energy-bar">
+                <div id="energy"></div>
+            </div>
+        </div>
+        <div class="buttons">
+            <button class="menu-button" onclick="window.location.href='boost.html'"><img src="image1.png" alt="Boost Icon">Boost</button>
+            <button class="menu-button" onclick="window.location.href='task.html'"><img src="image2.png" alt="Task Icon">Task</button>
+            <button class="menu-button" onclick="window.location.href='ref.html'"><img src="image3.png" alt="Ref Icon">Ref</button>
+        </div>
+        <!-- Additional -->
+        <div id="task-modal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p>Subscribe to our channel for a reward of 100,000 coins.</p>
+                <button id="subscribe-button">Subscribe</button>
+            </div>
+        </div>
+        <div id="boost-modal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p>Buy boost:</p>
+                <button id="boost-button" onclick="buyDoubleBoost()">Double click - 15,000 coins</button>
+                <!-- Add more boost options here -->
+            </div>
+        </div>
+        <div id="ref-modal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p>Your referral link:</p>
+                <p id="ref-link"></p>
+            </div>
+        </div>
+        <!-- End of additional -->
+    </div>
+    <!-- Кнопка с изображением и дополнительной информацией -->
+    <div class="info-button-container">
+        <button class="info-button">
+            <img src="image9.png" alt="Info Button">
+        </button>
+        <div class="info-text">listing soon</div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    const starsContainer = document.createElement('div');
+    starsContainer.className = 'stars';
+    document.body.appendChild(starsContainer);
+
+    let starIndex = 0;
+    const totalStars = 100;
+
+    // Функция для добавления звезды
+    function addStar() {
+        if (starIndex < totalStars) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.top = `${Math.random() * 100}vh`;
+            star.style.left = `${Math.random() * 100}vw`;
+            star.style.animationDelay = `${Math.random() * 2}s`;
+            starsContainer.appendChild(star);
+            starIndex++;
+        } else {
+            clearInterval(interval); // Останавливаем интервал после добавления всех звёзд
+        }
+    }
+
+    // Интервал для добавления звёзд по одной
+    const interval = setInterval(addStar, 50); // Добавляем новую звезду каждые 50 миллисекунд
+});
+
+
+    </script>
+       
+    <script src="script.js"></script>
+</body>
+</html>

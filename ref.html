@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Referral Link</title>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .info-box {
+            background-color: rgba(0, 0, 0, 0.7); /* черный полупрозрачный фон */
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 1em;
+            max-width: 50%; /* ограничиваем ширину */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .invite-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            border: none;
+            background-color: #FFC618; /* черный цвет с 50% прозрачностью */
+    box-shadow: 0px 4px #CB9900;
+            color: black;
+            cursor: pointer;
+            font-size: 1em;
+            font-family: 'Anton', Arial, sans-serif;
+            border-radius: 10px;
+            
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .invite-button:active {
+            box-shadow: 0px 4px #CB9900;
+            transform: translateY(3px);
+        }
+
+        h2 {
+            font-weight: normal; /* изменение стиля шрифта на нормальный */
+        }
+
+        @keyframes stars {
+            from {
+                transform: translateZ(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateZ(-1000px);
+                opacity: 0;
+            }
+        }
+
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+            perspective: 1000px;
+        }
+
+       .star {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.6);
+    transform-origin: 0 0 0;
+    animation: stars 4s linear infinite; /* Пример: анимация длится 4 секунды */
+
+    animation-delay: 0s;
+    border-radius: 50%;
+    opacity: 0; /* Добавьте это свойство */
+}
+
+        
+        body, html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Убирает горизонтальную прокрутку */
+    height: 100%;
+}
+
+#starsContainer {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden; /* Убирает вертикальную прокрутку, если есть */
+}
+
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="container">
+        <h2 style="text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">Referrals</h2>
+
+        <div class="info-box">
+            For each invited friend you will receive 100,000 coins
+            <br><button class="invite-button">Invite Friend</button>
+        </div>
+
+        <br><br><button class="menu-button" onclick="window.location.href='index.html'">
+            <img src="image44.png" alt="Boost Icon">Go Play
+        </button>
+    </div>
+    <div class="info-button-container">
+        <button class="info-button">
+            <img src="image9.png" alt="Info Button">
+        </button>
+        <div class="info-text">listing soon</div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    const starsContainer = document.createElement('div');
+    starsContainer.className = 'stars';
+    document.body.appendChild(starsContainer);
+
+    let starIndex = 0;
+    const totalStars = 100;
+
+    // Функция для добавления звезды
+    function addStar() {
+        if (starIndex < totalStars) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.top = `${Math.random() * 100}vh`;
+            star.style.left = `${Math.random() * 100}vw`;
+            star.style.animationDelay = `${Math.random() * 2}s`;
+            starsContainer.appendChild(star);
+            starIndex++;
+        } else {
+            clearInterval(interval); // Останавливаем интервал после добавления всех звёзд
+        }
+    }
+
+    // Интервал для добавления звёзд по одной
+    const interval = setInterval(addStar, 50); // Добавляем новую звезду каждые 50 миллисекунд
+});
+
+
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
+

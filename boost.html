@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boosts</title>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+      .booster-item {
+    display: flex;
+    align-items: center;
+    background-color: #FFC618; /* черный цвет с 50% прозрачностью */
+    box-shadow: 0px 3px #CB9900;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    position: relative; /* относительное позиционирование для размещения эмодзи */
+}
+.booster-item span {
+    color: black; /* черный текст */
+    margin-right: 10px;
+    font-size: 14px; /* уменьшение размера текста на 30% */
+}
+.booster-item .coin-icon {
+    font-size: 25px; /* увеличение размера эмодзи на две строки текста */
+    position: left; /* абсолютное позиционирование для эмодзи */
+    top: 25%; /* выравнивание по вертикали по центру */
+    transform: translateY(-25%); /* коррекция вертикального выравнивания */
+}
+.booster-item .details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 5px;
+    line-height: 0.8; /* блочный элемент для размещения на новой строке */
+}
+.booster-item button {
+    background: linear-gradient(45deg, orange, red); /* градиент оранжевого цвета */
+    border: none;
+    color: black;
+    cursor: pointer;
+    margin-left: auto; /* автоматическое выравнивание вправо */
+    font-size: 14px; /* уменьшение размера текста кнопки на 30% */
+    padding: 5px 10px; /* добавление внутреннего отступа для улучшения внешнего вида */
+    border-radius: 5px; /* округление углов */
+}
+
+h2 {
+    font-weight: normal; /* изменение стиля шрифта на нормальный */
+}
+
+  @keyframes stars {
+            from {
+                transform: translateZ(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateZ(-1000px);
+                opacity: 0;
+            }
+        }
+
+ .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+            perspective: 1000px;
+        }
+
+       .star {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.6);
+    transform-origin: 0 0 0;
+    animation: stars 4s linear infinite; /* Пример: анимация длится 4 секунды */
+
+    animation-delay: 0s;
+    border-radius: 50%;
+    opacity: 0; /* Добавьте это свойство */
+}
+
+        
+        body, html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Убирает горизонтальную прокрутку */
+    height: 100%;
+}
+
+#starsContainer {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden; /* Убирает вертикальную прокрутку, если есть */
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="boosters">
+            <h2 style="text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">Boosters</h2>
+
+            <div class="booster">
+                <div class="booster-item" onclick="buyBoost('multitap')">
+                    <span class="coin-icon">👋🏻</span>
+                    <span class="details">
+                        <span style="font-size: 14px;" id="multitap-name">Multitap</span><br>
+                        <span style="font-size: 12px;" id="multitap-details">💰 200 | 1 level</span>
+                    </span>
+                    <button><b>Buy</b></button>
+                </div>
+            </div>
+            <div class="booster">
+                <div class="booster-item" onclick="buyBoost('energy-limit')">
+                    <span class="coin-icon">🔋</span>
+                    <span class="details">
+                        <span style="font-size: 14px;" id="energy-name">Energy Limit</span><br>
+                        <span style="font-size: 12px;" id="energy-details">💰 200 | 1 level</span>
+                    </span>
+                    <button><b>Buy</b></button>
+                </div>
+            </div>
+            <div class="booster">
+                <div class="booster-item" onclick="buyBoost('recharge-speed')">
+                    <span class="coin-icon">🪫</span>
+                    <span class="details">
+                        <span style="font-size: 14px;" id="recharge-name">Recharging Speed</span><br>
+                        <span style="font-size: 12px;" id="recharge-details">💰 2000 | 1 level</span>
+                    </span>
+                    <button><b>Buy</b></button>
+                </div>
+            </div>
+            <div class="buttons">
+                <br><button class="menu-button" onclick="window.location.href='index.html'"><img src="image44.png" alt="Boost Icon">Go Play</button>
+            </div>
+        </div>
+    </div>
+    <div class="info-button-container">
+        <button class="info-button">
+            <img src="image9.png" alt="Info Button">
+        </button>
+        <div class="info-text">listing soon</div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    const starsContainer = document.createElement('div');
+    starsContainer.className = 'stars';
+    document.body.appendChild(starsContainer);
+
+    let starIndex = 0;
+    const totalStars = 100;
+
+    // Функция для добавления звезды
+    function addStar() {
+        if (starIndex < totalStars) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.top = `${Math.random() * 100}vh`;
+            star.style.left = `${Math.random() * 100}vw`;
+            star.style.animationDelay = `${Math.random() * 2}s`;
+            starsContainer.appendChild(star);
+            starIndex++;
+        } else {
+            clearInterval(interval); // Останавливаем интервал после добавления всех звёзд
+        }
+    }
+
+    // Интервал для добавления звёзд по одной
+    const interval = setInterval(addStar, 50); // Добавляем новую звезду каждые 50 миллисекунд
+});
+
+
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
